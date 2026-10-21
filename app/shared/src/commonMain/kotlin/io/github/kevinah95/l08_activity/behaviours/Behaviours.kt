@@ -14,12 +14,22 @@ import io.github.kevinah95.l08_activity.core.GameObject
  * - En `onFrame(dt)`, si `hop > 0`, reduce gradualmente `hop` hacia 0.
  */
 class March(gameObject: GameObject, var step: Double) : Behaviour(gameObject) {
+
     override fun onFrame(dt: Double) {
-        // TODO: Reducir suavemente gameObject.hop hacia 0
+        if (gameObject.hop > 0) {
+            gameObject.hop -= dt
+        }
+
+        if (gameObject.hop < 0) {
+            gameObject.hop = 0.0
+        }
     }
 
     override fun onUpdate(): Boolean {
-        // TODO: Incrementar gameObject.x según step y asignar hop = 2.0
+        if (gameObject.y <= 0) {
+            gameObject.x += step
+            gameObject.hop = 2.0
+        }
         return false
     }
 }
